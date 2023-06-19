@@ -71,7 +71,7 @@ Here's an example that demonstrates how to use the Eli-iDB plugin to add data to
 
 ```javascript
 const databaseName = 'myDatabase';
-const objectStoreName = 'myObjectStore';
+const objectStoreName = 'tblname';
 const data = {
   name: 'Ajay',
   email: 'techsoul4@gmail.com',
