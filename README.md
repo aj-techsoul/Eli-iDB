@@ -27,7 +27,7 @@ To use the Eli-iDB plugin, follow these steps:
    const eliDB = new EliDB(databaseName, objectStoreName);
    ```
 
-   Replace `databaseName` with the desired name for your IndexedDB database and `objectStoreName` with the name of the object store you want to work with, similar like `table`s in other dbs.
+   Replace `databaseName` with the desired name for your IndexedDB database and `objectStoreName` with the name of the object store you want to work with, similar like `table` under database.
 
 2. Use the available methods to perform operations on the database:
 
