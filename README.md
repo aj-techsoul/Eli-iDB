@@ -101,7 +101,7 @@ deleteData(db, objectTable, id)
 
 ### Example
 ```javascript
-async function addtt(formid,dbname,tblname) {
+async function example_add(formid,dbname,tblname) {
   const form = document.querySelector(formid);
   //console.log(form.elements);
   const elements = form.elements;
