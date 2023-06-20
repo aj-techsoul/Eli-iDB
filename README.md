@@ -96,7 +96,7 @@ deleteData(db, objectTable, id)
   .catch(error => {
     // Error occurred while deleting the data
   });
-``
+```
 
 
 ### Example
