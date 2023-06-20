@@ -99,54 +99,33 @@ deleteData(db, objectTable, id)
 ``
 
 
-#### Example
-Example Use Case: Managing a collection of books
-Open the database and create an object table named "books"
-```javascript
-openDatabase("library", "books")
-  .then(db => {
-    // Data objects for testing
-    const book1 = { id: 1, title: "The Great Gatsby", author: "F. Scott Fitzgerald" };
-    const book2 = { id: 2, title: "To Kill a Mockingbird", author: "Harper Lee" };
-    const book3 = { id: 3, title: "1984", author: "George Orwell" };
+### Example
+```
 
-    // Store data objects in the "books" object table
-    saveData(db, "books", book1)
-      .then(() => console.log("Book 1 stored successfully"))
-      .catch(error => console.error("Error storing Book 1:", error));
+// ---------------------
 
-    saveData(db, "books", book2)
-      .then(() => console.log("Book 2 stored successfully"))
-      .catch(error => console.error("Error storing Book 2:", error));
+// Example usage
+const databaseName = 'testdb';
+const objectStoreName = 'userx';
+const data = {
+  name: 'Ajay',
+  email: 'techsoul4@gmail.com',
+  phone: '9862542983'
+};
 
-    saveData(db, "books", book3)
-      .then(() => console.log("Book 3 stored successfully"))
-      .catch(error => console.error("Error storing Book 3:", error));
+async function add_data() {
+  try {
+    // Open the database
+    const db = await openDatabase(databaseName, objectStoreName);
 
-    // Retrieve all data objects from the "books" object table
-    getData(db, "books")
-      .then(data => {
-        console.log("Retrieved books:", data);
-        // Output: Retrieved books: [book1, book2, book3]
-      })
-      .catch(error => console.error("Error retrieving books:", error));
+    // Create and save the data
+    await createData(db, objectStoreName, data);
 
-    // Create a new book and store it in the "books" object table
-    const newBook = { title: "Pride and Prejudice", author: "Jane Austen" };
-    createData(db, "books", newBook)
-      .then(() => console.log("New book created and stored successfully"))
-      .catch(error => console.error("Error creating and storing new book:", error));
+    console.log('Data added successfully');
+  } catch (error) {
+    console.error('An error occurred:', error);
+  }
+}
 
-    // Update the title of a book with ID 1
-    const updatedData = { title: "The Great Gatsby (Updated)" };
-    updateData(db, "books", 1, updatedData)
-      .then(() => console.log("Book updated successfully"))
-      .catch(error => console.error("Error updating book:", error));
-
-    // Delete a book with ID 3
-    deleteData(db, "books", 3)
-      .then(() => console.log("Book deleted successfully"))
-      .catch(error => console.error("Error deleting book:", error));
-  })
-  .catch(error => console.error("Error opening database:", error));
+add_data();
 ```
