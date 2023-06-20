@@ -101,27 +101,36 @@ deleteData(db, objectTable, id)
 
 ### Example
 ```javascript
-const databaseName = 'testdb';
-const objectStoreName = 'userx';
-const data = {
-  name: 'Ajay',
-  email: 'techsoul4@gmail.com',
-  phone: '9862542983'
-};
+async function addtt(formid,dbname,tblname) {
+  const form = document.querySelector(formid);
+  //console.log(form.elements);
+  const elements = form.elements;
 
-async function add_data() {
+  // Convert form elements to JSON
+  const formData = {};
+  for (let i = 0; i < elements.length; i++) {
+    const element = elements[i];
+    if (element.name) {
+      formData[element.name] = element.value;
+    }
+  }
+
+  // Do something with the JSON data
+  //console.log(formData);
+  // You can send the formData to the server or perform any other operations
+
   try {
     // Open the database
-    const db = await openDatabase(databaseName, objectStoreName);
-
+    const db = await openDatabase(dbname, tblname);
     // Create and save the data
-    await createData(db, objectStoreName, data);
+    await createData(db, tblname, formData);
 
     console.log('Data added successfully');
   } catch (error) {
     console.error('An error occurred:', error);
   }
-}
 
-add_data();
+  // Clear the form
+  form.reset();
+}
 ```
