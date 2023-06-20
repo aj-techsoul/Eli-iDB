@@ -102,7 +102,7 @@ deleteData(db, objectTable, id)
 #### Example
 Example Use Case: Managing a collection of books
 Open the database and create an object table named "books"
-```
+```javascript
 openDatabase("library", "books")
   .then(db => {
     // Data objects for testing
