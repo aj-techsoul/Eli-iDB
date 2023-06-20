@@ -100,11 +100,7 @@ deleteData(db, objectTable, id)
 
 
 ### Example
-```
-
-// ---------------------
-
-// Example usage
+```javascript
 const databaseName = 'testdb';
 const objectStoreName = 'userx';
 const data = {
