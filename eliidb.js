@@ -25,7 +25,7 @@ async function saveData(db, objectStoreName, data) {
 
 // This function takes a database instance and an object store name as parameters, creates a transaction with a read mode using db.transaction(), retrieves the specified object store using transaction.objectStore(), opens a cursor to iterate over all the data in the object store using objectStore.openCursor(), and returns an array of all the data objects. It is an asynchronous function that returns a promise that resolves with the array of data objects.
 
-async function getData(db, objectStoreName) {
+async function getIData(db, objectStoreName) {
   const transaction = db.transaction(objectStoreName, "readonly");
   const objectStore = transaction.objectStore(objectStoreName);
   const cursorRequest = objectStore.openCursor();
@@ -42,10 +42,10 @@ async function getData(db, objectStoreName) {
 }
 
 
-// This function takes a database instance, an object store name, and a data object as parameters, retrieves the existing data from the specified object store using getData(), generates a new ID for the data object based on the last ID in the array, adds the ID property to the data object, and stores the data object in the object store using saveData(). It is an asynchronous function that returns a promise that resolves when the data is successfully stored.
+// This function takes a database instance, an object store name, and a data object as parameters, retrieves the existing data from the specified object store using getIData(), generates a new ID for the data object based on the last ID in the array, adds the ID property to the data object, and stores the data object in the object store using saveData(). It is an asynchronous function that returns a promise that resolves when the data is successfully stored.
 
 async function createData(db, objectStoreName, data) {
-  const items = await getData(db, objectStoreName);
+  const items = await getIData(db, objectStoreName);
   const lastId = items.length > 0 ? items[items.length - 1].id : 0;
   data.id = lastId + 1;
   await saveData(db, objectStoreName, data);
@@ -83,10 +83,10 @@ await transaction.complete;
 }
 
 
-// This function takes a database instance, an object store name, and a search keyword as parameters. It retrieves all the data from the specified object store using `getData()`, filters the data objects based on whether any of their values contain the search keyword using `Array.filter()`, and returns an array of the filtered data objects. It is an asynchronous function that returns a promise that resolves with the array of filtered data objects.
+// This function takes a database instance, an object store name, and a search keyword as parameters. It retrieves all the data from the specified object store using `getIData()`, filters the data objects based on whether any of their values contain the search keyword using `Array.filter()`, and returns an array of the filtered data objects. It is an asynchronous function that returns a promise that resolves with the array of filtered data objects.
 
 async function searchData(db, objectStoreName, keyword) {
-const items = await getData(db, objectStoreName);
+const items = await getIData(db, objectStoreName);
 const filteredItems = items.filter(item => {
 return Object.values(item).some(value =>
 String(value).toLowerCase().includes(keyword.toLowerCase())
